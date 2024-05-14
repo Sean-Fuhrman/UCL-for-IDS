@@ -13,7 +13,7 @@ DEFAULT_CONFIG = {
 }
 
 class datastream:
-    def __init__(self, config=None):
+    def __init__(self, train_x, train_y, test_x, test_y):
         self.initial_normal = None
         self.datastream = []
 
@@ -58,7 +58,8 @@ def get_dataset_MNIST(attack_classes=[0,1,2,3,4], normal_classes=[5,6,7,8,9], co
     return train_x.view(train_x.shape[0], -1), train_y, test_x.view(test_x.shape[0], -1), test_y
 
 def get_datastream_MNIST(attack_classes=[0,1,2,3,4], normal_classes=[5,6,7,8,9], config=None):
-    pass
+    train_x, train_y, test_x, test_y = get_dataset_MNIST(attack_classes, normal_classes, config)
+    return datastream(train_x, train_y, test_x, test_y, config)
 
 
 def generated_scenario(datastream, config):
